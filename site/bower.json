@@ -17,7 +17,12 @@
     "tests"
   ],
   "dependencies": {
-    "foundation": "~5.5.2"
+    "foundation": "~5.5.2",
+    "matchHeight": "~0.6.0",
+    "jquery": "~2.1.4",
+    "jqueryui": "~1.11.4",
+    "backbone": "~1.2.1",
+    "underscore": "~1.8.3"
   },
   "homepage": "https://github.com/shawnrice/gh-scrum-board"
 }
