@@ -50,12 +50,12 @@ app.get( '/api/:endpoint', function( request, response ) {
 	if( ( realPath = getFileRealPath( pathToCheck ) ) === false ){
 		response.send('[]');
 	} else {
-    response.sendfile('data/' + request.params.endpoint + '.json', {root: __dirname });
+    response.sendFile('data/' + request.params.endpoint + '.json', {root: __dirname });
 	}
 });
 
 //Start server
-var port = 4711;
+var port = process.env.PORT || 4711;
 
 app.listen( port, function() {
 	console.log( 'Express server listening on port %d in %s mode', port, app.settings.env );
