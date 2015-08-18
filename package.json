@@ -1,5 +1,5 @@
 {
-  "name": "Github Scrum Board",
+  "name": "github-scrum-board",
   "version": "0.0.1",
   "description": "Interactive Scrum Board using Github Labels / Issues",
   "author": "Shawn Patrick Rice <rice@shawnrice.org>",
