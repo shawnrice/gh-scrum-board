@@ -40,7 +40,7 @@ var AllCollaboratorsView = Backbone.View.extend({
 
 var ColumnView = Backbone.View.extend({
 	// model: function() { return new ColumnModel; },
-	el: function() { return $('#squish'); },
+	el: function() { return $('#scrum-board-canvas'); },
 	template: _.template(
 		"<div id='<%= name %>' class='scrum-column' style='width: <%= width %>%; max-width: <%= width %>%; background-color: #<%= color %>; margin: 0 <%= margin %>%;'>" +
 	  	"<h3><%= niceify(name.substr(12)) %></h3>" +
@@ -62,7 +62,7 @@ var ColumnView = Backbone.View.extend({
 
 var AllColumnsView = Backbone.View.extend({
 	el: $('#scrumboard'),
-	template: _.template("<div id='squish'><div class='title'><h1>Squish</h1></div></div>"),
+	template: _.template("<div id='scrum-board-canvas'><div class='title'><h1>Scrum Board</h1></div></div>"),
 	setWidths: function() {
 		if ( 0 == (100 % this.collection['models'].length) ) {
 			this.width = 100 / this.collection['models'].length;
@@ -95,11 +95,17 @@ var SingleTaskView = Backbone.View.extend({
 			"<div class='drag-handle'>" +
 				"<h6><%= title %><h6>" +
 			"</div>" +
+			"<div class='task-comments'>" +
+				"<strong><%= comments %></strong> comments" +
+			"</div>" +
 			"<div>" +
 				"<div class='description'><%= body %></div>" +
 				"<div class='assignee'>" +
-				"<select><option value=''>---</option><%= selected %></select>" +
+				"<select class='select-assignee'><option value=''>---</option><%= selected %></select>" +
 				"</div>" +
+			"</div>" +
+			"<div class='github-issue-link'>" +
+				"<a href='<%= url %>'>View issue on Github »</a>" +
 			"</div>" +
 		"</li>"
 	),

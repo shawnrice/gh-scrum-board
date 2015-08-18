@@ -88,7 +88,7 @@ var app = {
 					// We're not going to cycle through each label on each issue to see what
 					// the "issue" is. Har. Har.
 					_.each(issue['labels'], function(label) {
-						console.log(label);
+						// console.log(label);
 						if ( 'scrum-task' == label['name'].substr(0, 10)) {
 							// Issue is labeled as a task.
 							l['task'] = label;

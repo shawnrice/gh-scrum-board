@@ -56,10 +56,8 @@
 	border-radius: 1rem;
 }
 
-#squish {
+#scrum-board-canvas {
 	width: 100%;
-	/*min-width: 90%;*/
-	/*min-height: 100%;*/
 	margin: 0 auto;
 	min-height: 600px;
 	height: 600px;
@@ -72,17 +70,11 @@
 
 .title {
 	padding: 2em 1em 1em 1em;
-	border: 3px solid gray;
-	background-color: #efefef;
-	border-bottom: 5px solid gray;
 }
 
 .scrum-column {
 	float: left;
 	position: absolte;
-	border: 1px solid #dedede;
-	/*height: 100%;*/
-	/*min-height: 100%;*/
 	min-height: 600px;
 	z-index: 0;
 	margin: 0 0.5rem;
@@ -110,7 +102,7 @@
 	padding: 1em;
 	margin: 1rem !important;
 	/*border-radius: 0.75em;*/
-	border: 3px solid gray;
+	border: 1px solid gray;
 	list-style-type: none;
 	overflow: visible;
 	/*z-index: 999;*/
@@ -160,7 +152,20 @@
 	margin: 0;
 	font-size: 0.75rem;
 }
+
 body {
 	padding: 0;
 	margin: 0;
+}
+.task-comments {
+	font-size: 0.75rem;
+	margin-left: 0.5rem;
+	/*text-align: right;*/
+}
+.github-issue-link {
+
+}
+
+.github-issue-link a {
+	font-size: 0.5rem;
 }

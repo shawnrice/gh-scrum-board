@@ -17,7 +17,8 @@ var LabelCollection = Backbone.Collection.extend({
 	model: LabelModel,
 });
 var BoardCollection = Backbone.Collection.extend({
-	model: LabelModel,
+	url: '/api/milestones',
+	model: MilestoneModel,
 });
 var ColumnCollection = Backbone.Collection.extend({
 	model: LabelModel,

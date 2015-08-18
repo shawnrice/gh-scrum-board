@@ -7,8 +7,9 @@ var application_root = __dirname,
 
 //Create server
 var app = express();
+// Right now, we're using live-reload because this is, really, a development
+// project.
 app.use(require('connect-livereload')({port: 35729}));
-//Where to serve static content
 app.use( express.static( path.join( application_root, 'site') ) );
 app.use(bodyParser.urlencoded({
   extended: true
@@ -25,6 +26,10 @@ function getFileRealPath(s){
 }
 
 var Serve = function(endpoint, callback) {
+	// Right now, this just grabs the data that has already been downloaded from
+	// the Github API and saved as local files. This should, instead, either (1)
+	// do the same but update the files via Github calls, or (2) grab the data
+	// from Github itself.
 	var Endpoints = {
 		'collaborators': 'data/collaborators.json',
 		'labels': 'data/labels.json',

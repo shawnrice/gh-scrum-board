@@ -1,9 +1,15 @@
 var gulp = require('gulp');
         // rename = require('gulp-rename');
 
-
+// Since this is currently a development project, and since it will probably
+// never go live, we're just taking some shortcuts and throwing in livereload
+// to speed up development
 
 gulp.task('express', function() {
+	// So, there is a slightly better version of this in `server.js`, and
+	// this task should be changed to start/stop/restart that rather than
+	// having the code replicated here.
+
 	// Module dependencies.
 	var application_root = __dirname,
 	    express = require( 'express' ), //Web framework
@@ -54,7 +60,7 @@ gulp.task('express', function() {
 		}
 	});
 
-	//Start server
+	// Start server
 	var port = 4711;
 
 	app.listen( port, function() {

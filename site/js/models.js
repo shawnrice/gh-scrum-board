@@ -38,6 +38,7 @@ var IssueModel = Backbone.Model.extend({
 		state: null,
 		board: null,
 		assignee: null,
+		comments: 0,
 	}
 });
 var TaskModel = Backbone.Model.extend({
@@ -55,5 +56,13 @@ var TaskModel = Backbone.Model.extend({
 var CollaboratorModel = Backbone.Model.extend({
 	defaults: {
 		login: null,
+	}
+});
+
+// Based on Collaborators
+var MilestoneModel = Backbone.Model.extend({
+	defaults: {
+		title: null,
+		url: null,
 	}
 });

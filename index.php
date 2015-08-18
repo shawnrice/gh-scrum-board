@@ -11,8 +11,17 @@ curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 curl_setopt( $ch, CURLOPT_USERAGENT, 'scrum-board' );
 $json = curl_exec( $ch );
 curl_close( $ch );
-file_put_contents( __DIR__ . '/data/issues.json', $json );
+file_put_contents( __DIR__ . '/data/issues.json', json_encode( json_decode($json), JSON_PRETTY_PRINT ) );
 
+$ch = curl_init( "https://api.github.com/repos/shawnrice/gh-scrum-board/milestones" );
+curl_setopt( $ch, CURLOPT_HTTPHEADER, [
+  'Accept: application/vnd.github.v3+json',
+  ]);
+curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+curl_setopt( $ch, CURLOPT_USERAGENT, 'scrum-board' );
+$json = curl_exec( $ch );
+curl_close( $ch );
+file_put_contents( __DIR__ . '/data/milestones.json', json_encode( json_decode($json), JSON_PRETTY_PRINT ) );
 
 $ch = curl_init( "https://api.github.com/repos/shawnrice/gh-scrum-board/labels" );
 curl_setopt( $ch, CURLOPT_HTTPHEADER, [
@@ -22,7 +31,7 @@ curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 curl_setopt( $ch, CURLOPT_USERAGENT, 'scrum-board' );
 $json = curl_exec( $ch );
 curl_close( $ch );
-file_put_contents( __DIR__ . '/data/labels.json', $json );
+file_put_contents( __DIR__ . '/data/labels.json', json_encode( json_decode($json), JSON_PRETTY_PRINT ) );
 
 // THIS REQUIRES AUTHENTICATION
 // $ch = curl_init( "https://api.github.com/repos/shawnrice/gh-scrum-board/collaborators" );
