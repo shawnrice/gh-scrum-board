@@ -1,0 +1,14 @@
+{
+	"states": {
+		"story": "scrum-state-story",
+		"todo": "scrum-state-todo",
+		"in progress": "scrum-state-in-progress",
+		"to verify": "scrum-state-to-verify",
+		"done": "scrum-state-done"
+	},
+	"boards": {
+		"development": "scrum-board-development",
+		"documentation": "scrum-board-documentation"
+	},
+	"repo": "gh-scrum-board"
+}

@@ -1,0 +1,77 @@
+[
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/bug",
+    "name": "bug",
+    "color": "fc2929"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/duplicate",
+    "name": "duplicate",
+    "color": "cccccc"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/enhancement",
+    "name": "enhancement",
+    "color": "84b6eb"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/help%20wanted",
+    "name": "help wanted",
+    "color": "159818"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/invalid",
+    "name": "invalid",
+    "color": "e6e6e6"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/question",
+    "name": "question",
+    "color": "cc317c"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/wontfix",
+    "name": "wontfix",
+    "color": "ffffff"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/scrum-board-documentation",
+    "name": "scrum-board-documentation",
+    "color": "5319e7"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/scrum-board-development",
+    "name": "scrum-board-development",
+    "color": "006b75"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/scrum-task",
+    "name": "scrum-task",
+    "color": "009800"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/scrum-state-story",
+    "name": "scrum-state-story",
+    "color": "f7c6c7"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/scrum-state-todo",
+    "name": "scrum-state-todo",
+    "color": "fef2c0"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/scrum-state-in-progress",
+    "name": "scrum-state-in-progress",
+    "color": "d4c5f9"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/scrum-state-to-verify",
+    "name": "scrum-state-to-verify",
+    "color": "c7def8"
+  },
+  {
+    "url": "https://api.github.com/repos/shawnrice/gh-scrum-board/labels/scrum-state-done",
+    "name": "scrum-state-done",
+    "color": "bfe5bf"
+  }
+]
