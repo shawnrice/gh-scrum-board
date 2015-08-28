@@ -2,7 +2,9 @@
 
 This is really all just me screwing around to learn Backbone.js.
 
-Currently, the server for the backend doesn't actually interface with the GH api. Instead, the data loaded is just downloaded from this repo's issue queue and stored as `json` files.
+But, it allows you to use any Github repo's issue queue as a SCRUM board.
+
+There is a very simple Express server included.
 
 ### To install / test:
 
@@ -14,5 +16,7 @@ cd site
 bower install
 cd ..
 node server.js
+# Or, if you have gulp, just do:
+# gulp
 open http://localhost:4711
 ```

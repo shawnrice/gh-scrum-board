@@ -1,68 +1,90 @@
 /** Tabs! */
 #tabs {
 	height: 100%;
-	position: fixed;
-	width: 250px;
-	background-color: gray;
-	display: table-cell;
-	vertical-align: middle;
-	padding-top: 5%;
+	overflow-x: scroll;
+	overflow-y: visible;
+	/*position: fixed;*/
+	/*width: 250px;*/
+	/*background-color: gray;*/
+	/*display: table-cell;*/
+	/*vertical-align: middle;*/
+	/*padding-top: 5%;*/
+}
+
+
+
+#tab-list {
+	z-index: 999999;
 }
 
 #tabs ul {
-	width: 250px;
+	width: 10rem;
 }
 
 #tabs li {
-	width: 250px;
+	width: 10rem;
 	text-overflow: ellipsis;
 	word-wrap: none;
 	overflow: hidden;
   white-space: nowrap;
 }
 
+#tabs li a {
+	font-size: 0.95rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
 #tabs-content {
-	margin-left: 300px;
+	margin-left: 12rem;
 }
 
-/** Scrub Board */
-#scrumboard {
-	min-width: 90%;
-	width: 90%;
-	/*position: relative;*/
+
+
+#tab-list, #tab-content {
 	/*float: left;*/
-	padding: 0 auto;
-	margin: 0 auto;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	overflow: visible;
+	/*position: absolute;*/
+	clear: none;
 }
 
-#scrumboard ul {
+#tab-list {
+	padding-top: 4rem;
+	min-height: 100%;
+	background-color: gray;
+	position: fixed;
+}
+
+#tab-content {
+	margin-left: 12rem;
+	position: relative;
+	overflow-x: scroll;
+	overflow-y: visible;
+	/*width: 100% !important;*/
+}
+
+/*#scrumboard ul {
 	margin: 0;
 	list-style-type: none;
 	overflow: visible;
 	min-height: 600px;
-}
+}*/
 
 .ui-state-highlight {
 	height: 150px;
-	margin: 2.5rem;
+	margin: 25px 5px;
 	background-color: black;
+	width: 190px !important;
 	opacity: 0.1;
 	border-radius: 1rem;
 }
 
-#scrum-board-canvas {
-	width: 100%;
+.scrum-board-canvas {
+	min-width: 95%;
 	margin: 0 auto;
-	min-height: 600px;
-	height: 600px;
-	clear: both;
-	overflow: visible;
+	min-height: 900px;
+	height: 100%;
+	overflow-x: scroll;
+	overflow-y: visible;
 	position: relative;
 	float: left;
 	text-align: center;
@@ -74,8 +96,9 @@
 
 .scrum-column {
 	float: left;
-	position: absolte;
-	min-height: 600px;
+	/*position: absolte;*/
+	min-height: 900px;
+	height: 100%;
 	z-index: 0;
 	margin: 0 0.5rem;
 	padding: 0;
@@ -99,13 +122,12 @@
 .task {
 	background-color: white;
 	min-height: 200px;
-	padding: 1em;
-	margin: 1rem !important;
-	/*border-radius: 0.75em;*/
+	width: 200px !important;
+	padding: 0.25rem;
+	margin: 0.5rem !important;
 	border: 1px solid gray;
 	list-style-type: none;
-	overflow: visible;
-	/*z-index: 999;*/
+	/*overflow: visible;*/
 }
 
 .task:hover {
@@ -116,21 +138,22 @@
 
 .task-placeholder {
 	opacity: 0.3;
-	min-height: 200px;
+	/*min-height: 200px;*/
 	content: ' ';
+	width: 172px;
+	margin: 0;
 }
 
 .drag-handle {
 	cursor: move;
-	padding: 0.25rem;
-	padding-left: 0.5rem;
-	/*overflow: visible;*/
+	padding: 0.5rem;
+	margin: 0.5rem;
 }
 
 .drag-handle:hover {
 	background-color: #efefef;
-	padding: 0.25rem;
-	padding-left: 0.5rem;
+	padding: 0.5rem;
+	margin: 0.5rem;
 }
 
 .sortable {
@@ -143,19 +166,23 @@
 	font-size: 0.75rem;
 	height: 5rem;
 	padding: 0.5rem;
-	/*text-align: justify;*/
-	overflow: auto;
+	display: inline-block;
+	width: 100%;
+	overflow: auto !important;
+	white-space: normal;
 	margin-bottom: 0.5rem;
 }
 
 .assignee select {
-	margin: 0;
+	margin: 0 5%;
+	width: 90%;
 	font-size: 0.75rem;
 }
 
 body {
 	padding: 0;
 	margin: 0;
+	/*background-color: #EFEFEF;*/
 }
 .task-comments {
 	font-size: 0.75rem;
@@ -167,5 +194,71 @@ body {
 }
 
 .github-issue-link a {
+	font-size: 0.65rem !important;
+	/*margin: 0 6%;*/
+}
+
+#login-information {
+	margin: 0;
+}
+
+#login-information ul {
+	list-style-type: none;
+	margin: 0;
+}
+
+#login-information li {
+	list-style-type: none;
+	margin: 0;
+}
+
+.logged-in-name {
+	background-color: #efefef;
+	padding: 0.75rem;
+	/*margin: 0;*/
+}
+
+.messages {
+	background-color: red;
+}
+
+.repo-form {
+	margin-right: 2rem;
+}
+
+.repo-submit {
+	margin-left: 1rem;
+	border: none;
 	font-size: 0.5rem;
+	background-color: #fafafa;
+}
+.repo-submit:hover {
+	background-color: #eaeaea;
+}
+
+.repo-form li {
+	display: inline-block;
+}
+
+
+.input-divider {
+	font-size: 2rem;
+	display: table-cell;
+	line-height: 1rem;
+	vertical-align: bottom;
+	clear: none;
+
+	padding: 0;
+	margin: 0 0.5rem;
+	color: #efefef;
+}
+
+.regular-list {
+	width: 100% !important;
+	max-width: 100%;
+}
+
+.regular-list li {
+	width: 100% !important;
+	max-width: 100%;
 }

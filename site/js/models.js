@@ -13,9 +13,12 @@ var LabelModel = Backbone.Model.extend({
 });
 var BoardModel = Backbone.Model.extend({
 	defaults: {
-		name: null,
+		id: null,
+		title: null,
+		description: null,
 		url: null,
-		color: null,
+		html_url: null,
+		number: null,
 	}
 });
 var ColumnModel = Backbone.Model.extend({
@@ -24,6 +27,8 @@ var ColumnModel = Backbone.Model.extend({
 		url: null,
 		color: null,
 		width: null,
+		board: null,
+		number: null,
 	}
 });
 
@@ -39,6 +44,8 @@ var IssueModel = Backbone.Model.extend({
 		board: null,
 		assignee: null,
 		comments: 0,
+		board: null,
+		number: null,
 	}
 });
 var TaskModel = Backbone.Model.extend({
@@ -49,6 +56,7 @@ var TaskModel = Backbone.Model.extend({
 		state: null,
 		board: null,
 		assignee: null,
+		number: null,
 	}
 });
 
@@ -64,5 +72,6 @@ var MilestoneModel = Backbone.Model.extend({
 	defaults: {
 		title: null,
 		url: null,
+		number: null,
 	}
 });

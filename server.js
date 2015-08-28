@@ -3,7 +3,8 @@ var application_root = __dirname,
     express = require( 'express' ), //Web framework
     bodyParser = require('body-parser'), //Parser for reading request body
     path = require( 'path' ), //Utilities for dealing with file paths
-    fs = require( 'fs' );
+    fs = require( 'fs' ),
+    github = require('octonode');
 
 //Create server
 var app = express();
@@ -45,13 +46,32 @@ var Serve = function(endpoint, callback) {
 }
 
 // Routes
-app.get( '/api/:endpoint', function( request, response ) {
+app.get( '/api/:endpoint', function (request, response) {
 	var realPath, pathToCheck = 'data/' + request.params.endpoint + '.json';
 	if( ( realPath = getFileRealPath( pathToCheck ) ) === false ){
 		response.send('[]');
 	} else {
     response.sendFile('data/' + request.params.endpoint + '.json', {root: __dirname });
 	}
+});
+
+app.post( '/login', function (request, response) {
+
+	// console.log(request.body);
+	var client = github.client({
+		username: request.body.login,
+		password: request.body.password
+	});
+
+	client.get('/user', {}, function (err, status, body, headers) {
+		if ( err ) {
+			response.send(err);
+		}
+		if ( body ) {
+			response.send(body);
+		}
+	});
+
 });
 
 //Start server

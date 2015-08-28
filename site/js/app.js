@@ -2,19 +2,25 @@
 //////// Main Controller
 ////////
 
+// var github = require('octonode');
+
 // This is, basically, the overall controller, which we call the 'app'
 var app = {
 	collaborators: [],
-	init: function() {
-		console.log('Initializing app');
+	boards: {},
+	init: function(repo, repoOwner) {
+		console.log('Initializing app for ' + repo + '/' + repoOwner);
+		this.repo = repo;
+		this.repoOwner = repoOwner;
 		this.dfd = new $.Deferred();
 		this.initLabels();
 		this.initIssues();
 		this.initCollaborators();
+		this.initBoards();
 		return this.dfd.promise();
 	},
 	checkDeferred: function() {
-		var deferreds = [ this.dfdCollaborators, this.dfdLabels, this.dfdIssues ];
+		var deferreds = [ this.dfdCollaborators, this.dfdLabels, this.dfdIssues, this.dfdBoards ];
 		var good = true;
 		_.each(deferreds, function(deferred) {
 			if ( 'resolved' != deferred.state() ) {
@@ -38,26 +44,31 @@ var app = {
 		this.dfdCollaborators = new $.Deferred();
 		this.PopulateCollaborators();
 	},
+	initBoards: function() {
+		this.dfdBoards = new $.Deferred();
+		this.PopulateBoards();
+	},
 	SetBoards: function(data) {
 		console.log("Setting boards");
-		this.boards = new BoardCollection(data);
+		// this.boards = new BoardCollection(data);
 	},
 	SetColumns: function(data) {
 		this.columns = new ColumnCollection(data);
 	},
 	PopulateLabels: function() {
 		var _this = this;
-		this.labelCollection = new LabelCollection;
+		this.labelCollection = new LabelCollection({ repo: this.repo, repoOwner: this.repoOwner });
 		this.labelCollection.fetch({
+			headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
 			success: function(data) {
 				this.labels = data.toJSON();
 				boards = [];
 				columns = [];
 				_.each(this.labels, function(data) {
-					if ('scrum-board-' == data['name'].substr(0, 12)) {
+					if ('scrum-board-' == data.name.substr(0, 12)) {
 						boards.push(data);
 					}
-					if ('scrum-state-' == data['name'].substr(0, 12)) {
+					if ('scrum-state-' == data.name.substr(0, 12)) {
 						columns.push(data);
 					}
 				});
@@ -70,60 +81,54 @@ var app = {
 				_this.dfd.resolve('Promise for data retrieval not fulfilled.');
 			}
 		});
-		this.columns = new ColumnCollection;
+		this.columns = new ColumnCollection();
 	},
 	PopulateIssues: function() {
 		var _this = this;
-		this.issueCollection = new IssueCollection;
+		this.issueCollection = new IssueCollection({ repo: this.repo, repoOwner: this.repoOwner });
 		this.issueCollection.fetch({
+			headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
 			success: function(data) {
 				// Convert the issues to usable JSON
 				this.issues = data.toJSON();
 				var tasks = [];
-				var issueStates = {};
+				var boards = {};
+				boards.issueStates = {};
 				// // We're going to go through each label to see what it is...
 				_.each(this.issues, function(issue){
 					// We're now going to cycle through each issue to see what it is
 					l = {};
 					// We're not going to cycle through each label on each issue to see what
 					// the "issue" is. Har. Har.
-					_.each(issue['labels'], function(label) {
-						// console.log(label);
-						if ( 'scrum-task' == label['name'].substr(0, 10)) {
-							// Issue is labeled as a task.
-							l['task'] = label;
-						}
-						if ( 'scrum-board' == label['name'].substr(0, 11)) {
-							// Issue is labeled with a particular board. We can put it on a board!
-							// @todo: change the boards to milestones
-							l['board'] = label['name'];
-						}
-						if ( 'scrum-state' == label['name'].substr(0, 11)) {
+					_.each(issue.labels, function(label) {
+						if ( 'scrum-state' == label.name.substr(0, 11)) {
 							// The issue has a scrum-state on it. We can put it in a column!
-							l['state'] = label['name'];
+							l.state = label.name;
 						}
 					});
+					if ( undefined != issue.milestone ) {
+						l.board = issue.milestone.id;
+					}
 					// This is a terrible way to code this, but it's at hack status right now.
 					// See if the issue both is a task and has a state. If so, then we'll
 					// include it in the collection of things to render.
-					if ( (undefined !== l['task']) && (undefined !== l['state']) ) {
-						if ( undefined == issueStates[l['state']] ) {
+					if ( (undefined !== l.board) && (undefined !== l.state) ) {
+						if ( undefined == boards.issueStates[l.state] ) {
 							// This particular state has not been defined yet, so we'll define it.
-							issueStates[l['state']] = [issue];
+							boards.issueStates[l.state] = [issue];
 						} else {
 							// This state has been defined, so we'll push the issue into that state.
-							issueStates[l['state']].push(issue);
+							boards.issueStates[l.state].push(issue);
 						}
 					}
 				});
 				// We need to get the keys of the issueStates object in order to cycle through
 				// the object.
-				var keys = Object.keys(issueStates);
+				var keys = Object.keys(boards.issueStates);
 				_.each(keys, function(key) {
-					tasks.push(new TaskCollection({name: key, collection: issueStates[key]}));
+					tasks.push(new TaskCollection({name: key, collection: boards.issueStates[key]}));
 				});
 				_this.tasks = tasks;
-				_this.issueStates = issueStates;
 				_this.dfdIssues.resolve('Populated issue data.');
 				_this.checkDeferred();
 			},
@@ -131,21 +136,44 @@ var app = {
 				console.log('Doh! We have an "issue" getting the issues. Irony or meta?');
 			},
 		});
-		this.tasks = new TaskCollection;
+		this.tasks = new TaskCollection();
 	},
 	PopulateCollaborators: function() {
 		var _this = this;
 		console.log('Populating Collaborators');
-		this.collaboratorCollection = new CollaboratorsCollection;
+		this.collaboratorCollection = new CollaboratorsCollection({ repo: this.repo, repoOwner: this.repoOwner });
 		this.collaboratorCollection.fetch({
+			headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
 			success: function(data) {
+				_this.Access = true;
 				_this.dfdCollaborators.resolve('Loaded collaborators');
 				_this.checkDeferred();
 			},
 			error: function(err) {
+				_this.Access = false;
 				console.log('There was an error getting collaborators');
 				_this.dfdCollaborators.resolve('Could not fetch collaborators.');
+				_this.checkDeferred();
 			}
 		});
 	},
-}
+	PopulateBoards: function() {
+		var _this = this;
+		console.log('Populating Boards');
+		this.boardCollection = new BoardCollection({ repo: this.repo, repoOwner: this.repoOwner });
+		this.boardCollection.fetch({
+			headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
+			success: function(data) {
+				_this.boards = data.toJSON();
+				_this.dfdBoards.resolve('Loaded boards');
+				_this.checkDeferred();
+			},
+			error: function(err) {
+				console.log('Could not fetch boards');
+				console.log(err);
+				_this.dfdBoards.resolve('Could not fetch boards');
+				_this.checkDeferred();
+			}
+		});
+	},
+};
