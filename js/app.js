@@ -2,8 +2,6 @@
 //////// Main Controller
 ////////
 
-// var github = require('octonode');
-
 // This is, basically, the overall controller, which we call the 'app'
 var app = {
 	collaborators: [],
@@ -30,6 +28,53 @@ var app = {
 		if (true == good) {
 			this.dfd.resolve('Loaded all data');
 			console.log('Finished getting / populating data. Rendering canvas.');
+
+			if ( 0 === this.boards.length || 0 === this.columns.length ) {
+				$('#boards').append('<ul class="errors"><li><h1>Errors</h1></li></ul>');
+				if ( 0 === this.boards.length ) {
+					$('ul.errors').append('<li><h4>There are no boards.</h4></li>');
+					$('ul.errors').append('<li><a href="#" id="new-board-modal-link"> + Create a board.</a></li>');
+					$('#new-board-modal-link').on('click', function(event) {
+						event.preventDefault();
+						$('#new-board-modal').foundation('reveal','open');
+					});
+				}
+				if ( 0 === this.columns.length ) {
+					$('ul.errors').append('<li><h4>There are SCRUM states defined.</h4></li>');
+					$('ul.errors').append('<li><a href="#" id="create-scrum-states">+ Create the SCRUM states.</a></li>');
+					$('#create-scrum-states').on('click', function(event) {
+						event.preventDefault();
+						if ( confirm('Do you want to create the scrum labels?') ) {
+							console.log('Creating SCRUM labels');
+							_.each({
+								'scrum-state-story': 'f7c6c7',
+								'scrum-state-todo': 'fef2c0',
+								'scrum-state-in-progress': 'd4c5f9',
+								'scrum-state-to-verify': 'c7def8',
+								'scrum-state-done': 'bfe5bf',
+							}, function( color, name ) {
+								console.log(name + ': ' + color);
+								var url = 'https://api.github.com/repos/' + this.repoOwner + '/' + this.repo + '/labels';
+								$.ajax({
+							    url: url,
+							    type: 'POST',
+							    data: JSON.stringify( { name: name, color: color } ),
+							    headers: setAuth(),
+							    success: function(result) {
+							    	console.log(result);
+							    },
+							    error: function(err) {
+							    	console.log(err);
+							    }
+								});
+							});
+						}
+					});
+				}
+				if ( 0 === this.tasks.length ) {
+					$('ul.errors').append('<li><h4>There are no tasks defined.</h4></li>');
+				}
+			}
 		}
 	},
 	initLabels: function() {
@@ -59,7 +104,7 @@ var app = {
 		var _this = this;
 		this.labelCollection = new LabelCollection({ repo: this.repo, repoOwner: this.repoOwner });
 		this.labelCollection.fetch({
-			headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
+			headers: setAuth(),
 			success: function(data) {
 				this.labels = data.toJSON();
 				boards = [];
@@ -87,7 +132,7 @@ var app = {
 		var _this = this;
 		this.issueCollection = new IssueCollection({ repo: this.repo, repoOwner: this.repoOwner });
 		this.issueCollection.fetch({
-			headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
+			headers: setAuth(),
 			success: function(data) {
 				// Convert the issues to usable JSON
 				this.issues = data.toJSON();
@@ -143,7 +188,7 @@ var app = {
 		console.log('Populating Collaborators');
 		this.collaboratorCollection = new CollaboratorsCollection({ repo: this.repo, repoOwner: this.repoOwner });
 		this.collaboratorCollection.fetch({
-			headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
+			headers: setAuth(),
 			success: function(data) {
 				_this.Access = true;
 				_this.dfdCollaborators.resolve('Loaded collaborators');
@@ -162,7 +207,7 @@ var app = {
 		console.log('Populating Boards');
 		this.boardCollection = new BoardCollection({ repo: this.repo, repoOwner: this.repoOwner });
 		this.boardCollection.fetch({
-			headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
+			headers: setAuth(),
 			success: function(data) {
 				_this.boards = data.toJSON();
 				_this.dfdBoards.resolve('Loaded boards');

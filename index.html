@@ -14,7 +14,13 @@
     <li class="name">
       <h1><a href="#">Github Scrum Board</a></h1>
     </li>
+
   </ul>
+   <section class="top-bar-section">
+    <ul>
+		  <li><a class='about-modal' href='#'>About</a></li>
+    </ul>
+  </section>
 	<ul class='right repo-form'>
 	<form id='repo-form' name='repo-form'>
 		<li><input id='repoOwner' type='text' name='repoOwner' placeholder='Repo Owner'></li>
@@ -35,47 +41,18 @@
 	</div>
 	<div id='tab-content'>
 		<div id='boards'>
-			<div class='row'>
-				<div>&nbsp;</div>
-				<h1>Github SCRUM Board</h1>
-				<h3>About</h3>
-				<p>
-					The <a href='https://github.com/shawnrice/gh-scrum-board' target='_blank'>Github Scrum Board</a> was written by <a href='https://github.com/shawnrice' /target='_blank'>me</a>, <a href='http://shawnrice.org' target='_blank'>Shawn Patrick Rice</a>. Basically, it allows you to use the issue queue on a Github repository to create a <a href='https://en.wikipedia.org/wiki/Scrum_(software_development)' target='_blank'>SCRUM</a> board.
-				</p>
-				<h3>How does the data work?</h3>
-				<p>
-					Each board is a <code>milestone</code>, and each issue that has a label starting with <code>scrum-state-</code> is added to a column. The columns are labels named as <code>scrum-state-NAME</code>, and their backgrounds are the colors of the issues.
-				</p>
-				<p>
-					If you move a task, assign another user, or create a new task, then the Github issue queue is updated.
-				</p>
-				<h3>Why do I need to login?</h3>
-				<p>
-					You do need to login to use the SCRUM board, but your credentials are stored in <code>sessionStorage</code> and interface directly with the Github API, so you don't need to worry about app using your credentials. Also, you need to have commit access to the repo to be able to change the SCRUM board, simply because the Github API will reject any changes that you try to make otherwise. Hence, everyone who can interact with the
-					SCRUM board can be assigned to a task.
-				</p>
-				<h3>Adding Collaborators</h3>
-				<p>
-					To add other possible assignees, you must manually add them via the Github site. <a href='https://help.github.com/articles/adding-collaborators-to-a-personal-repository/' target='_blank'>Read the docs</a>.
-				</p>
-				<h3>What's left to do?</h3>
-				<ul class='regular-list'>
-					<li>Add in Backbone polling to update from GH at intervals without a full reload</li>
-					<li>Make it work better asynchonously</li>
-					<li>Add in an 'auto-setup' to make any repo into a scrum board</li>
-					<li>Fix CSS to remove many of the <code>!important</code> attributes</li>
-					<li>Make it prettier</li>
-			</div>
 		</div>
 	</div>
 </div>
+
+
 
 <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js' type='text/javascript'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js' type='text/javascript'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js' type='text/javascript'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.2/backbone-min.js' type='text/javascript'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js'></script>
-<script src='bower_components/matchHeight/jquery.matchHeight-min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.6.0/jquery.matchHeight-min.js'></script>
 
 <!-- Helper Functions -->
 <script src='js/utilities.js' type='text/javascript'></script>
@@ -87,10 +64,6 @@
 <script src='js/views.js' type='text/javascript'></script>
 <!-- Main App Controller Logic -->
 <script src='js/app.js' type='text/javascript'></script>
-
-
-
-
 
 <div id="create-task" class="reveal-modal" data-reveal aria-labelledby="Create New Task" aria-hidden="true" role="dialog">
   <h2 id='create-task-title'></h2>
@@ -107,11 +80,75 @@
   </form>
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
-<style>
 
-</style>
+<div id="about-modal" class="reveal-modal" data-reveal aria-labelledby="About" aria-hidden="true" role="dialog">
+	<div id='about-content'>
+		<div class='row'>
+			<div>&nbsp;</div>
+			<h1>Github SCRUM Board</h1>
+			<h3>About</h3>
+			<p>
+				The <a href='https://github.com/shawnrice/gh-scrum-board' target='_blank'>Github Scrum Board</a> was written by <a href='https://github.com/shawnrice' /target='_blank'>me</a>, <a href='http://shawnrice.org' target='_blank'>Shawn Patrick Rice</a>. Basically, it allows you to use the issue queue on a Github repository to create a <a href='https://en.wikipedia.org/wiki/Scrum_(software_development)' target='_blank'>SCRUM</a> board.
+			</p>
+			<h3>Preview</h3>
+			<p>
+				For a 'view-only' preview, try using the repo <code>shawnrice</code>/<code>gh-scrum-board</code>.
+			</p>
+			<h3>How does the data work?</h3>
+			<p>
+				Each board is a <code>milestone</code>, and each issue that has a label starting with <code>scrum-state-</code> is added to a column. The columns are labels named as <code>scrum-state-NAME</code>, and their backgrounds are the colors of the issues.
+			</p>
+			<p>
+				If you move a task, assign another user, or create a new task, then the Github issue queue is updated.
+			</p>
+			<h3>Why do I need to login?</h3>
+			<p>
+				You do need to login to use the SCRUM board, but your credentials are stored in <code>sessionStorage</code> and interface directly with the Github API, so you don't need to worry about app using your credentials. Also, you need to have commit access to the repo to be able to change the SCRUM board, simply because the Github API will reject any changes that you try to make otherwise. Hence, everyone who can interact with the
+				SCRUM board can be assigned to a task.
+			</p>
+			<h3>Adding Collaborators</h3>
+			<p>
+				To add other possible assignees, you must manually add them via the Github site. <a href='https://help.github.com/articles/adding-collaborators-to-a-personal-repository/' target='_blank'>Read the docs</a>.
+			</p>
+			<h3>What's left to do?</h3>
+			<ul class='regular-list'>
+				<li>Add in Backbone polling to update from GH at intervals without a full reload</li>
+				<li>Make it work better asynchonously</li>
+				<li>Fix CSS to remove many of the <code>!important</code> attributes</li>
+				<li>Make it prettier</li>
+			</ul>
+		</div>
+	</div>
+	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
+<div id="new-board-modal" class="reveal-modal" data-reveal aria-labelledby="Create Board" aria-hidden="true" role="dialog">
+  <form id='create-board-form'>
+    <fieldset>
+      <label for="title">Name</label>
+      <input type="text" name="name" id="new-board-name" class="text ui-widget-content ui-corner-all">
+      <button id='create-board-submit'>Create Board</button>
+    </fieldset>
+  </form>
+	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
 
 <script>
+$('#boards').html($('#about-content').html());
+$('.about-modal').on('click', function(event) {
+	event.preventDefault();
+	$('#about-modal').foundation('reveal','open');
+});
+
+$('#create-board-form').on('submit', function(event) {
+	event.preventDefault();
+	var form = {};
+	$.each($(this).serializeArray(), function (i, field) {
+		form[field.name] = field.value || "";
+	});
+	createMilestone(getRepo, getRepoOwner, form.name);
+})
+
 // console.log('Window Width:');
 // console.log( $(window).width());
 
@@ -143,14 +180,14 @@
 	//////// Start the 'app' and make it work
 	////////
 
-	function getRepo(repo, repoOwner) {
+	function fetchRepo(repo, repoOwner) {
 		if ( repo && repoOwner ) {
 			console.log('About to load repo');
 			var url = 'https://api.github.com/repos/' + repoOwner + '/' + repo;
 			$.ajax({
 		    url: url,
 		    type: 'GET',
-		    headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
+		    headers: { 'Authorization': 'Basic ' + Base64.encode( getLogin() + ':' + getPassword() ) },
 		    success: function(result) {
 		    	sessionStorage.setItem('repo', repo);
 		    	sessionStorage.setItem('repoOwner', repoOwner);
@@ -165,8 +202,8 @@
 
 	function loadRepo() {
 
-		repoOwner = sessionStorage.getItem('repoOwner');
-		repo = sessionStorage.getItem('repo');
+		repoOwner = getRepoOwner();
+		repo = getRepo();
 
 		$('#repo-form').on('submit', function(event) {
 			event.preventDefault();
@@ -176,7 +213,7 @@
     		form[field.name] = field.value || null;
 			});
 			if ( form.repo && form.repoOwner ) {
-				getRepo( form.repo, form.repoOwner );
+				fetchRepo( form.repo, form.repoOwner );
 			} else {
 				alert('Please fill in a repo owner and a repo name.');
 			}
@@ -397,5 +434,3 @@
 </script>
 </body>
 </html>
-
-
