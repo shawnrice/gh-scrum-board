@@ -22,3 +22,11 @@ node server.js
 # gulp
 open http://localhost:4711
 ```
+
+### Todo
+
+* Make it prettier
+* Sort out dumb fixed tabs
+* Fix for smaller viewports
+* Add "ice-box"
+* Fix for touch screens
