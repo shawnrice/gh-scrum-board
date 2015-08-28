@@ -148,6 +148,7 @@
 	cursor: move;
 	padding: 0.5rem;
 	margin: 0.5rem;
+	overflow:auto;
 }
 
 .drag-handle:hover {
@@ -253,12 +254,12 @@ body {
 	color: #efefef;
 }
 
-.regular-list {
+.regular-list, .errors {
 	width: 100% !important;
 	max-width: 100%;
 }
 
-.regular-list li {
+.regular-list li, .errors li {
 	width: 100% !important;
 	max-width: 100%;
 }
