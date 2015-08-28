@@ -22,11 +22,10 @@ function buildLoginForm() {
   	event.preventDefault();
 	  var form = {};
 		$.each($(this).serializeArray(), function (i, field) {
-			// sessionStorage.setItem(field.name, field.value);
     	form[field.name] = field.value || "";
 		});
 		$.ajax({
-	    url: 'https://api.github.com/user',
+	    url: 'https://api.github.com',
 	    type: 'GET',
 	    headers: { 'Authorization': 'Basic ' + Base64.encode( form.login + ':' + form.password ) },
 		  success: function (data) {
