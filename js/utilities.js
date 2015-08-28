@@ -28,8 +28,7 @@ function buildLoginForm() {
 		$.ajax({
 	    url: 'https://api.github.com/user/',
 	    type: 'GET',
-	    headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
-		  data: JSON.stringify( form ),
+	    headers: { 'Authorization': 'Basic ' + Base64.encode( form.login + ':' + form.password ) },
 		  success: function (data) {
 		  	if ( 401 == data.statusCode ) {
 		  		alert('Could not login with those credentials');
