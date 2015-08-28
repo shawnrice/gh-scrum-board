@@ -6,6 +6,7 @@
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
+    "octonode": "^0.7.1",
     "path": "^0.11.14"
   },
   "devDependencies": {
@@ -18,17 +19,17 @@
     "tiny-lr": "^0.1.6"
   },
   "repository": {
-	  "type": "git",
-	  "url": "https://github.com/shawnrice/gh-scrum-board"
-	},
+    "type": "git",
+    "url": "https://github.com/shawnrice/gh-scrum-board"
+  },
   "bugs": {
-	  "url": "https://github.com/shawnrice/gh-scrum-board/issues"
-	},
+    "url": "https://github.com/shawnrice/gh-scrum-board/issues"
+  },
   "keywords": [
-	  "backbone",
-	  "github",
-	  "scrum"
-	],
+    "backbone",
+    "github",
+    "scrum"
+  ],
   "scripts": {
     "start": "node server.js"
   }

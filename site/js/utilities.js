@@ -22,13 +22,12 @@ function buildLoginForm() {
   	event.preventDefault();
 	  var form = {};
 		$.each($(this).serializeArray(), function (i, field) {
-			// sessionStorage.setItem(field.name, field.value);
     	form[field.name] = field.value || "";
 		});
 		$.ajax({
-		  type: 'POST',
-		  url: '/login',
-		  data: form,
+	    url: 'https://api.github.com',
+	    type: 'GET',
+	    headers: { 'Authorization': 'Basic ' + Base64.encode( form.login + ':' + form.password ) },
 		  success: function (data) {
 		  	if ( 401 == data.statusCode ) {
 		  		alert('Could not login with those credentials');
