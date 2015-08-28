@@ -26,9 +26,10 @@ function buildLoginForm() {
     	form[field.name] = field.value || "";
 		});
 		$.ajax({
-		  type: 'POST',
-		  url: '/login',
-		  data: form,
+	    url: 'https://api.github.com/user/',
+	    type: 'GET',
+	    headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
+		  data: JSON.stringify( form ),
 		  success: function (data) {
 		  	if ( 401 == data.statusCode ) {
 		  		alert('Could not login with those credentials');
