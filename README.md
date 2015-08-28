@@ -6,6 +6,8 @@ But, it allows you to use any Github repo's issue queue as a SCRUM board.
 
 There is a very simple Express server included.
 
+Or, just check it out on the `gh-pages`: [https://shawnrice.github.io/gh-scrum-board].
+
 ### To install / test:
 
 ```shell
