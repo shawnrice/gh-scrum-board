@@ -26,7 +26,7 @@ function buildLoginForm() {
     	form[field.name] = field.value || "";
 		});
 		$.ajax({
-	    url: 'https://api.github.com/user/',
+	    url: 'https://api.github.com/user',
 	    type: 'GET',
 	    headers: { 'Authorization': 'Basic ' + Base64.encode( form.login + ':' + form.password ) },
 		  success: function (data) {
