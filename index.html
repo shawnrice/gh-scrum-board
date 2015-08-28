@@ -357,7 +357,13 @@
 	} // End loadApp();
 
 	function unloadApp() {
-		$( '#tabs' ).tabs( 'destroy' );
+		try {
+			$( '#tabs' ).tabs( 'destroy' );
+		} catch(err) {
+    	// Nothing here. I just leave this in for now because I want to try to
+    	// not destroy the tabs beore they are ever created. Hence, we just
+    	// ignore the error.
+		}
 		$('#boards').html('');
 		$('#ul-tabs').html('');
 	}
