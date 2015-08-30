@@ -2,6 +2,8 @@
 //////// Main Controller
 ////////
 
+// var github = require('octonode');
+
 // This is, basically, the overall controller, which we call the 'app'
 var app = {
 	collaborators: [],
