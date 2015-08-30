@@ -162,6 +162,17 @@
 // To begin with, we'll just load the "about" to the main content area
 $('#boards').html($('#about-content').html());
 
+// This is the beginning of a dumb check to make sure each library loaded.
+// var libraries = { 'jQuery': $, 'Underscore': _, 'Backbone': Backbone, 'Foundation': Foundation }
+// for (var key in libraries) {
+// 	if ( libraries[key] ) {
+// 		console.log( key + ' has been loaded');
+// 	} else {
+// 		console.log( key );
+// 	}
+// };
+
+
 // Bind the 'About' link in the navbar for the modal
 $('.about-modal').on('click', function(event) {
 	event.preventDefault();
@@ -409,6 +420,9 @@ function loadApp(repo, repoOwner) {
 
 	  $( '#ul-tabs li:first-child' ).addClass( 'active' );
 	  $( '#boards div.content:first-child' ).addClass( 'active' );
+		var timeout = setTimeout(function() {
+			$('.off-canvas-wrap').foundation('offcanvas', 'show', 'move-right');
+		 }, 800);
 	});
 } // End loadApp();
 
@@ -440,10 +454,17 @@ $(document).ready(function() {
 		loadApp(repo, repoOwner);
 	} else {
 		buildLoginForm();
+		var timeout = setTimeout(function() {
+			$('.off-canvas-wrap').foundation('offcanvas', 'show', 'move-right');
+     }, 1000);
+
 	}
 	updateTabs();
 	updateMenu();
 });
+
+
+
 
 
 </script>

@@ -75,8 +75,8 @@ function buildLoginForm() {
 			  	sessionStorage.setItem('password', form.password);
 			  	console.log('Saved credentials in session storage');
 					buildLogoutLink(form);
-					repoOwner = sessionStorage.getItem('repoOwner');
-					repo = sessionStorage.getItem('repo');
+					repoOwner = getRepoOwner();
+					repo = getRepo();
 					if ( repo && repoOwner ) {
 						loadApp(repo, repoOwner);
 					}
