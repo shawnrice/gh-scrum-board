@@ -1,73 +1,43 @@
+/* Nav Bar Styling */
+nav li {
+	list-style-type: none;
+}
+
+nav li.name > a {
+	font-size: 1rem;
+}
+
+
 /** Tabs! */
 #tabs {
 	height: 100%;
 	overflow-x: scroll;
 	overflow-y: visible;
-	/*position: fixed;*/
-	/*width: 250px;*/
-	/*background-color: gray;*/
-	/*display: table-cell;*/
-	/*vertical-align: middle;*/
-	/*padding-top: 5%;*/
+	position: relative;
 }
 
-
-
-#tab-list {
-	z-index: 999999;
+.tab-title {
+	width: 250px;
 }
 
-#tabs ul {
-	width: 10rem;
-}
-
-#tabs li {
-	width: 10rem;
-	text-overflow: ellipsis;
-	word-wrap: none;
-	overflow: hidden;
-  white-space: nowrap;
-}
-
-#tabs li a {
+.tab-title a {
 	font-size: 0.95rem;
 	padding-left: 1rem;
 	padding-right: 1rem;
 }
 
-#tabs-content {
-	margin-left: 12rem;
+.ul-tabs {
+	padding-top: 10rem;
+	clear: both;
 }
 
-
-
-#tab-list, #tab-content {
-	/*float: left;*/
-	/*position: absolute;*/
-	clear: none;
+/* The iframe class is just used on the Github fork and star buttons */
+.iframe {
+	display: table-cell;
+	vertical-align: bottom;
+	line-height: 2rem;
+	padding-top: 0.75rem;
 }
-
-#tab-list {
-	padding-top: 4rem;
-	min-height: 100%;
-	background-color: gray;
-	position: fixed;
-}
-
-#tab-content {
-	margin-left: 12rem;
-	position: relative;
-	overflow-x: scroll;
-	overflow-y: visible;
-	/*width: 100% !important;*/
-}
-
-/*#scrumboard ul {
-	margin: 0;
-	list-style-type: none;
-	overflow: visible;
-	min-height: 600px;
-}*/
 
 .ui-state-highlight {
 	height: 150px;
@@ -86,17 +56,15 @@
 	overflow-x: scroll;
 	overflow-y: visible;
 	position: relative;
-	float: left;
 	text-align: center;
 }
 
 .title {
-	padding: 2em 1em 1em 1em;
+	padding: 0em 1em 1em 1em;
 }
 
 .scrum-column {
 	float: left;
-	/*position: absolte;*/
 	min-height: 900px;
 	height: 100%;
 	z-index: 0;
@@ -127,7 +95,6 @@
 	margin: 0.5rem !important;
 	border: 1px solid gray;
 	list-style-type: none;
-	/*overflow: visible;*/
 }
 
 .task:hover {
@@ -138,7 +105,6 @@
 
 .task-placeholder {
 	opacity: 0.3;
-	/*min-height: 200px;*/
 	content: ' ';
 	width: 172px;
 	margin: 0;
@@ -158,8 +124,8 @@
 }
 
 .sortable {
-	position: relative;
 	height: 100%;
+	position: relative;
 	overflow: visible;
 }
 
@@ -180,35 +146,21 @@
 	font-size: 0.75rem;
 }
 
-body {
-	padding: 0;
-	margin: 0;
-	/*background-color: #EFEFEF;*/
-}
 .task-comments {
 	font-size: 0.75rem;
 	margin-left: 0.5rem;
-	/*text-align: right;*/
-}
-.github-issue-link {
-
 }
 
 .github-issue-link a {
 	font-size: 0.65rem !important;
-	/*margin: 0 6%;*/
 }
 
-#login-information {
+#login {
+	clear: both;
 	margin: 0;
 }
 
-#login-information ul {
-	list-style-type: none;
-	margin: 0;
-}
-
-#login-information li {
+#login li {
 	list-style-type: none;
 	margin: 0;
 }
@@ -216,50 +168,50 @@ body {
 .logged-in-name {
 	background-color: #efefef;
 	padding: 0.75rem;
-	/*margin: 0;*/
 }
 
 .messages {
 	background-color: red;
 }
 
-.repo-form {
-	margin-right: 2rem;
+
+/* The fields used to load the repository on the upper right */
+.repo-form input {
+	margin-top: 0.25rem;
+	margin-bottom: 0;
 }
 
-.repo-submit {
-	margin-left: 1rem;
-	border: none;
-	font-size: 0.5rem;
-	background-color: #fafafa;
-}
-.repo-submit:hover {
-	background-color: #eaeaea;
-}
-
-.repo-form li {
-	display: inline-block;
-}
-
-
+/* This is just the slash between the two fields */
 .input-divider {
 	font-size: 2rem;
 	display: table-cell;
 	line-height: 1rem;
 	vertical-align: bottom;
 	clear: none;
-
-	padding: 0;
+	padding-top: 0.9rem;
 	margin: 0 0.5rem;
 	color: #efefef;
 }
 
-.regular-list, .errors {
-	width: 100% !important;
-	max-width: 100%;
+/* The 'Load Repo' button */
+.repo-submit {
+	margin: 0.25rem 2rem 0rem 1rem !important;
+	line-height: 0.5rem !important;
+	border: none;
+	color: black !important;
+	font-size: 1.3rem !important;
+	padding: 0.75rem 1rem 0.75rem 1rem !important;
+	background-color: #eaeaea !important;
+	height: 2.25rem !important;
+	border-color: #c9c9c9 !important;
+}
+.repo-submit:hover, {
+	background-color: #c9c9c9 !important;
+	border-color: #c9c9c9 !important;
 }
 
-.regular-list li, .errors li {
+/* So, the CSS here is really inelegant, and we need to reset some dumb things */
+.regular-list, .errors, .regular-list li, .errors li {
 	width: 100% !important;
 	max-width: 100%;
 }

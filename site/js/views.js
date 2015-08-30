@@ -17,7 +17,7 @@ var TabView = Backbone.View.extend({
 var BoardView = Backbone.View.extend({
 	el: $('#boards'),
 	template: _.template(
-		"<div id='board-<%= id %>' class='board' milestone='<%= id %>'>" +
+		"<div id='board-<%= id %>' class='content board' milestone='<%= id %>'>" +
 			"<h2><%= title %></h2>" +
 			"<div class='messages'></div>" +
 		"</div>"
@@ -92,7 +92,7 @@ var ColumnView = Backbone.View.extend({
 	// model: function() { return new ColumnModel; },
 	// el: function() { return $('.scrum-board-canvas'); },
 	template: _.template(
-		"<div class='scrum-column <%= name %>' style='width: <%= width %>%; max-width: <%= width %>%; background-color: #<%= color %>; margin: 0 <%= margin %>%;'>" +
+		"<div class='scrum-column <%= name %>' style='width: <%= width %>%; max-width: <%= width %>%; background-color: #<%= color %>; margin: 0 <%= margin %>%;' data-equalizer-watch='column'>" +
 	  	"<h3><%= niceify(name.substr(12)) %></h3>" +
 	  	"<hr />" +
 	  	"<ul id='<%= name %>-content' class='sortable'></ul>" +
@@ -114,12 +114,13 @@ var ColumnView = Backbone.View.extend({
 var AllColumnsView = Backbone.View.extend({
 	// el: $('#scrumboard'),
 	template: _.template(
-		"<div class='scrum-board-canvas'>" +
+		"<div class='scrum-board-canvas' data-equalizer='column'>" +
 			"<div class='title'>" +
 				"<h1><%= name %></h1>" +
 				"<a class='add-new-task' board='<%= name %>' milestone=<%= number %> href='#'>+ new task</a>" +
 			"</div>" +
-		"<div class='messages'></div></div>"
+			"<div class='messages'></div>" +
+		"</div>"
 	),
 	setWidths: function() {
 		if ( 0 == (100 % this.collection.models.length) ) {
@@ -154,7 +155,7 @@ var SingleTaskView = Backbone.View.extend({
 	template: _.template(
 		"<li id='issue-<%= number %>' class='task'>" +
 			"<div class='drag-handle'>" +
-				"<h6><%= title %><h6>" +
+				"<%= title %>" +
 			"</div>" +
 			"<div class='task-comments'>" +
 				"<strong><%= comments %></strong> comments" +

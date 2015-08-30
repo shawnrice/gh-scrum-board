@@ -3,56 +3,76 @@
 <head>
   <meta charset='UTF-8'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
-  <title>GH Scrum Board</title>
+  <title>Github Scrum Board</title>
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/normalize.min.css'>
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css'>
   <link rel='stylesheet' href='css/style.css'>
 </head>
 <body>
-<nav class='top-bar' data-topbar role='navigation'>
-  <ul class="title-area">
-    <li class="name">
-      <h1><a href="#">Github Scrum Board</a></h1>
-    </li>
 
-  </ul>
-   <section class="top-bar-section">
-    <ul>
-		  <li><a class='about-modal' href='#'>About</a></li>
-    </ul>
+<nav class="tab-bar">
+  <div class="left-small">
+  	<!-- This activates the nice off-canvas menu -->
+    <a role="button" aria-expanded="false" aria-controls="idOfLeftMenu" class="left-off-canvas-toggle menu-icon" ><span></span></a>
+  </div>
+
+  <section class="middle tab-bar-section">
+    <section class="top-bar-section">
+	    <ul class="title-area">
+			  <li class="name">
+		      <a href="#">Github Scrum Board</a>
+			  </li>
+			  <!-- iFrame for github star count for the project -->
+			  <li class='iframe'>
+			  	<iframe src="https://ghbtns.com/github-btn.html?user=shawnrice&repo=gh-scrum-board&type=star&count=true" frameborder="0" scrolling="0" width="80px" height="20px"></iframe>
+			  </li>
+			  <!-- iFrame for the github fork coutn for the project -->
+			  <li class='iframe'>
+			  	<iframe src="https://ghbtns.com/github-btn.html?user=shawnrice&repo=gh-scrum-board&type=fork&count=true" frameborder="0" scrolling="0" width="80px" height="20px"></iframe>
+			  </li>
+			  <li>
+			  	<a class='about-modal' href='#'>About</a>
+			  </li>
+		  </ul>
+	  </section>
   </section>
-	<ul class='right repo-form'>
-	<form id='repo-form' name='repo-form'>
-		<li><input id='repoOwner' type='text' name='repoOwner' placeholder='Repo Owner'></li>
-		<li class='input-divider'>/</li>
-		<li><input id='repo' type='text' name='repo' placeholder='Repo Name'></li>
-		<li><input id='repo-submit' class='repo-submit' type='submit' name='submit' value='Load Repo'></li>
-	</form>
-	</ul>
+  <section class='right tab-bar-section'>
+  	<section class='top-bar-section'>
+    	<ul class='right repo-form'>
+				<form id='repo-form' name='repo-form'>
+					<li><input id='repoOwner' type='text' name='repoOwner' placeholder='Repo Owner'></li>
+					<li class='input-divider'>/</li>
+					<li><input id='repo' type='text' name='repo' placeholder='Repo Name'></li>
+					<li><button id='repo-submit' class='repo-submit' class='small'>Load Repo</button></li>
+				</form>
+			</ul>
+		</section>
+	</section>
 </nav>
 
-
-
-<div id='tabs'>
-	<div id='tab-list'>
-		<ul id='ul-tabs' class='tabs vertical' data-tab></ul>
-		<div id='login'>
-			<ul id='login-information'></div>
-	</div>
-	<div id='tab-content'>
-		<div id='boards'>
-		</div>
-	</div>
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+	  <aside class="left-off-canvas-menu">
+			<div id='tabs'>
+				<section>
+					<ul id='ul-tabs' class='tabs vertical' data-tab></ul>
+				</section>
+				<section id='login'>
+					<ul id='login-information'></ul>
+				</section>
+			</div>
+		</aside>
+		<div id='boards' class='center tabs-content'><!-- The boards go here --></div>
+	  <a class="exit-off-canvas"></a>
+  </div>
 </div>
 
-
-
+<!-- Load all the external javascript from Cloudflare's CDN -->
 <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js' type='text/javascript'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js' type='text/javascript'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js' type='text/javascript'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.2/backbone-min.js' type='text/javascript'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js'></script>
-<script src='//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.6.0/jquery.matchHeight-min.js'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'></script>
 
 
@@ -67,9 +87,9 @@
 <!-- Main App Controller Logic -->
 <script src='js/app.js' type='text/javascript'></script>
 
+<!-- This is the create new task modal form -->
 <div id="create-task" class="reveal-modal" data-reveal aria-labelledby="Create New Task" aria-hidden="true" role="dialog">
   <h2 id='create-task-title'></h2>
-  <!-- <p class="lead">Your couch.  It is mine.</p> -->
   <form id='create-task-form'>
     <fieldset>
       <label for="title">Name</label>
@@ -83,6 +103,7 @@
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
 
+<!-- This is the about modal -->
 <div id="about-modal" class="reveal-modal" data-reveal aria-labelledby="About" aria-hidden="true" role="dialog">
 	<div id='about-content'>
 		<div class='row'>
@@ -124,6 +145,7 @@
 	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
 
+<!-- This is the create new board (milestone) form -->
 <div id="new-board-modal" class="reveal-modal" data-reveal aria-labelledby="Create Board" aria-hidden="true" role="dialog">
   <form id='create-board-form'>
     <fieldset>
@@ -136,12 +158,16 @@
 </div>
 
 <script>
+// To begin with, we'll just load the "about" to the main content area
 $('#boards').html($('#about-content').html());
+
+// Bind the 'About' link in the navbar for the modal
 $('.about-modal').on('click', function(event) {
 	event.preventDefault();
 	$('#about-modal').foundation('reveal','open');
 });
 
+// Bind the 'create board form' link.
 $('#create-board-form').on('submit', function(event) {
 	event.preventDefault();
 	var form = {};
@@ -155,282 +181,266 @@ $('#create-board-form').on('submit', function(event) {
 // console.log( $(window).width());
 
 
-	// I don't know backbone very well, but it annoys me that most of the functionality is in the view
-	// rather than split between the controller and model. I'm not sure if this happens often with
-	// backbone, but this seems to be what I'm doing. Bad or normal?
-	//
-	// Also, right now, I'm binding some events (here just logging so far because the write integration
-	// to Github hasn't been implemented in the backend) via jQuery in the sortable widget. I might
-	// try to see if I can do this in Backbone instead, if that is possible.
-	//
-	// We also need to add polling to the app so that it will receive updates from GH itself. I can
-	// do this either via circuiting it through the backend or via GH itself. It would be easier to
-	// make sure there was no read/write conflict or mismatch if it's all circuited through the
-	// backend.
-	//
-	// @todo use closed state
-	// @todo add in icebox
-	// @todo add ability to choose repo
-	// @todo add in app authentication with github
-	// @todo add in polling to Github for server
-	// @todo add in polling to server from app
-	// @todo add in Backbone events to update the views upon receiving new data
+// I don't know backbone very well, but it annoys me that most of the functionality is in the view
+// rather than split between the controller and model. I'm not sure if this happens often with
+// backbone, but this seems to be what I'm doing. Bad or normal?
+//
+// Also, right now, I'm binding some events (here just logging so far because the write integration
+// to Github hasn't been implemented in the backend) via jQuery in the sortable widget. I might
+// try to see if I can do this in Backbone instead, if that is possible.
+//
+// We also need to add polling to the app so that it will receive updates from GH itself. I can
+// do this either via circuiting it through the backend or via GH itself. It would be easier to
+// make sure there was no read/write conflict or mismatch if it's all circuited through the
+// backend.
+//
+// @todo use closed state
+// @todo add in icebox
+// @todo add in polling to Github from app
+// @todo add in Backbone events to update the views upon receiving new data
 
 
 
-	////////
-	//////// Start the 'app' and make it work
-	////////
+////////
+//////// Start the 'app' and make it work
+////////
 
-	function fetchRepo(repo, repoOwner) {
-		if ( repo && repoOwner ) {
-			console.log('About to load repo');
-			var url = 'https://api.github.com/repos/' + repoOwner + '/' + repo;
-			$.ajax({
-		    url: url,
-		    type: 'GET',
-		    headers: { 'Authorization': 'Basic ' + Base64.encode( getLogin() + ':' + getPassword() ) },
-		    success: function(result) {
-		    	sessionStorage.setItem('repo', repo);
-		    	sessionStorage.setItem('repoOwner', repoOwner);
-		    	loadApp(repo, repoOwner);
+function fetchRepo(repo, repoOwner) {
+	if ( repo && repoOwner ) {
+		console.log('About to load repo');
+		var url = 'https://api.github.com/repos/' + repoOwner + '/' + repo;
+		$.ajax({
+	    url: url,
+	    type: 'GET',
+	    headers: setAuth(),
+	    success: function(result) {
+	    	sessionStorage.setItem('repo', repo);
+	    	sessionStorage.setItem('repoOwner', repoOwner);
+	    	loadApp(repo, repoOwner);
+	    },
+	    error: function(err) {
+	    	alert('Error: could not load the repo; is it valid?');
+	    	console.log(err);
+	    }
+		});
+	}
+}
+
+function loadRepo() {
+
+	repoOwner = getRepoOwner();
+	repo = getRepo();
+
+	$('#repo-form').on('submit', function(event) {
+		event.preventDefault();
+		unloadApp();
+	  var form = {};
+		$.each($(this).serializeArray(), function (i, field) {
+  		form[field.name] = field.value || null;
+		});
+		if ( form.repo && form.repoOwner ) {
+			fetchRepo( form.repo, form.repoOwner );
+		} else {
+			alert('Please fill in a repo owner and a repo name.');
+		}
+	});
+}
+
+function unloadRepo() {
+
+}
+
+// So, I think that I'm cheating by making everything wait for sort of all-encompassing promise
+// to resolve, but the data wasn't rendering correctly because it was executing faster than
+// the data could populate, so... am I cheating? Probably. Is it good enough for a first run? Sure.
+function loadApp(repo, repoOwner) {
+	if ( ! ( repo && repoOwner ) ) {
+		return;
+	}
+	var appPromise = app.init(repo, repoOwner);
+	appPromise.done(function() {
+
+		// Renders tabs and boards
+		var boards = new BoardsView({ el: $('#boards'), collection: app.boards });
+		boards.render();
+
+		// This will render the board and the columns on the board.
+		_.each( app.boards, function(board) {
+			var columns = new AllColumnsView({
+				el: $('#board-' + board.id),
+				collection: app.columns,
+				name: board.title,
+				id: board.id,
+				number: board.number,
+			});
+		  columns.render();
+		});
+
+	  // This will render the tasks in the columns
+		var issueView = new AllTasksView({ collection: app.tasks });
+		issueView.render();
+
+	  if ( false === app.Access ) {
+	  	$('.messages').html('You do not have commit access to this repository, and so you cannot make any changes.');
+	  	$('.select-assignee').prop('disabled', true);
+	  } else {
+			// Make everything sortable.
+		  $( '.sortable' ).sortable({
+		  	connectWith: '.sortable',
+		  	tolerance: 100,
+		  	snap: true,
+		  	revert: 50,
+		  	opacity: 0.85,
+		  	helper: 'hover',
+		  	forcePlaceholderSize: true,
+		  	cursorAt: { left: 5, top: 5 },
+		  	appendTo: 'body',
+				helper: 'clone',
+		    placeholder: 'ui-state-highlight',
+		    change: function(event, ui) {
+		    	equalize(); // Match column heights
 		    },
-		    error: function(err) {
-		    	console.log(err);
-		    }
-			});
-		}
-	}
-
-	function loadRepo() {
-
-		repoOwner = getRepoOwner();
-		repo = getRepo();
-
-		$('#repo-form').on('submit', function(event) {
-			event.preventDefault();
-			unloadApp();
-		  var form = {};
-			$.each($(this).serializeArray(), function (i, field) {
-    		form[field.name] = field.value || null;
-			});
-			if ( form.repo && form.repoOwner ) {
-				fetchRepo( form.repo, form.repoOwner );
-			} else {
-				alert('Please fill in a repo owner and a repo name.');
-			}
-		});
-	}
-
-	function unloadRepo() {
-
-	}
-
-	// So, I think that I'm cheating by making everything wait for sort of all-encompassing promise
-	// to resolve, but the data wasn't rendering correctly because it was executing faster than
-	// the data could populate, so... am I cheating? Probably. Is it good enough for a first run? Sure.
-	function loadApp(repo, repoOwner) {
-		if ( ! ( repo && repoOwner ) ) {
-			return;
-		}
-		var appPromise = app.init(repo, repoOwner);
-		appPromise.done(function() {
-
-			// Renders tabs and boards
-			var boards = new BoardsView({ el: $('#boards'), collection: app.boards });
-			boards.render();
-
-			// This will render the board and the columns on the board.
-			_.each( app.boards, function(board) {
-				var columns = new AllColumnsView({
-					el: $('#board-' + board.id),
-					collection: app.columns,
-					name: board.title,
-					id: board.id,
-					number: board.number,
-				});
-			  columns.render();
-			});
-
-		  // This will render the tasks in the columns
-			var issueView = new AllTasksView({ collection: app.tasks });
-			issueView.render();
-
-		  if ( false === app.Access ) {
-		  	$('.messages').html('You do not have commit access to this repository, and so you cannot make any changes.');
-		  	$('.select-assignee').prop('disabled', true);
-		  } else {
-				// Make everything sortable.
-			  $( '.sortable' ).sortable({
-			  	connectWith: '.sortable',
-			  	tolerance: 100,
-			  	snap: true,
-			  	revert: 50,
-			  	opacity: 0.85,
-			  	helper: 'hover',
-			  	forcePlaceholderSize: true,
-			  	cursorAt: { left: 5, top: 5 },
-			  	appendTo: 'body',
-					helper: 'clone',
-			    placeholder: 'ui-state-highlight',
-			    change: function(event, ui) {
-			    	// Resize all the columns to make sure that they still match in size
-			    	$('.scrum-column').matchHeight();
-			    },
-			    remove: function(event, ui) {
-			    	// We need to send a call to remove the old state tag
-			    	var issue = event.toElement.id.substr(6);
-			    	var label = this.id.substr(0, this.id.length - 8);
-			    	$.ajax({
-					    url: 'https://api.github.com/repos/' + repoOwner + '/' + repo + '/issues/' + issue + '/labels/' + label,
-					    type: 'DELETE',
-					    headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
-					   	success: function() {
-					   		console.log('EVENT: Remove tag: ' + label + ' from ' + issue);
-					   	},
-					   	error: function(error) {
-					   		console.log('ERROR: Cannot remove tag: ' + label + ' from ' + issue);
-					   		console.log(error);
-					   	},
-						}).done(function() {
-
-				    	$('.scrum-column').matchHeight();
-						});
-			    },
-			    receive: function(event, ui) {
-			    	// We need to send a call to add the new state tag
-			    	var issue = event.toElement.id.substr(6);
-			    	var label = this.id.substr(0, this.id.length - 8);
-			    	$.ajax({
-					    url: 'https://api.github.com/repos/' + repoOwner + '/' + repo + '/issues/' + issue + '/labels',
-					    type: 'POST',
-					    data: JSON.stringify( [ label ] ),
-					    headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
-					    success: function(result) {
-				      	console.log('EVENT: Add tag: ' + label + ' from ' + issue);
-					    },
-					    error: function(err) {
-					    	console.log('ERROR: Cannot add tag: ' + label + ' from ' + issue);
-					    	console.log(err);
-					    }
-						}).done(function() {
-				    	$('.scrum-column').matchHeight();
-						});
-
-			    }
-			  });
-			  $('.select-assignee').change(function (event, ui) {
-			  	var issue = $($(this).parent().parent().parent())[0]['id'].substr(6);
-			  	var newAssignee = this.value;
-
-			  	if (newAssignee == '') {
-			  		newAssignee = null;
-			  		var data = { assignee: newAssignee };
-			  	}
-			  	console.log(data);
+		    remove: function(event, ui) {
+		    	var issue = event.toElement.id.substr(6);
+		    	var label = this.id.substr(0, this.id.length - 8);
+		    	// We need to send a call to remove the old state tag
 		    	$.ajax({
-					    url: 'https://api.github.com/repos/' + repoOwner + '/' + repo + '/issues/' + issue,
-					    type: 'PATCH',
-					    data: JSON.stringify( { assignee: newAssignee } ),
-					    headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
-					    success: function(result) {
-				      	console.log('EVENT: Assign task ' + issue + ' to ' + newAssignee);
-					    },
-					    error: function(err) {
-					    	console.log('ERROR: Cannot assign task ' + issue + ' to ' + newAssignee);
-					    	console.log(err);
-					    }
-						});
-			  	// /repos/:owner/:repo/issues/:number
+				    url: buildBaseUrl() + '/issues/' + issue + '/labels/' + label,
+				    type: 'DELETE',
+				    headers: setAuth(),
+				   	success: function() {
+				   		console.log('EVENT: Remove tag: ' + label + ' from ' + issue);
+				   	},
+				   	error: function(error) {
+				   		console.log('ERROR: Cannot remove tag: ' + label + ' from ' + issue);
+				   		console.log(error);
+				   	},
+					}).done(function() {
 
-			  });
-		  }
-		  $('a.add-new-task').on('click', function() {
-		  	$('#new-task-board').val($(this).attr('milestone'));
-		  	$('#create-task-title').html('Create new task on ' + $(this).attr('board'));
-  			$('#create-task').foundation('reveal','open');
-  			$('#create-task-form').on('submit', function(event) {
-  				event.preventDefault();
-				  var form = {};
-					$.each($(this).serializeArray(), function (i, field) {
-						// sessionStorage.setItem(field.name, field.value);
-			    	form[field.name] = field.value || "";
+			    	equalize(); // Match column heights
 					});
-					if ( ! form.title ) {
-						alert('You must include a title');
-					} else {
-						form.labels = [ 'scrum-state-story' ];
-						$('#create-task').foundation('reveal','close');
-			    	$.ajax({
-					    url: 'https://api.github.com/repos/' + repoOwner + '/' + repo + '/issues',
-					    type: 'POST',
-					    data: JSON.stringify( form ),
-					    headers: { 'Authorization': 'Basic ' + Base64.encode( sessionStorage.getItem('login') + ':' + sessionStorage.getItem('password') ) },
-					    success: function(result) {
-					    	console.log(result);
-				      	console.log('EVENT: Created new task.');
-				      	new SingleTaskView([ result ], 'scrum-state-story');
-				      	$('.scrum-column').matchHeight();
-					    },
-					    error: function(err) {
-					    	console.log('ERROR: Cannot create new task');
-					    	console.log(err);
-					    }
-						});
-					}
+		    },
+		    receive: function(event, ui) {
+		    	var issue = event.toElement.id.substr(6);
+		    	var label = this.id.substr(0, this.id.length - 8);
+		    	// We need to send a call to add the new state tag
+		    	$.ajax({
+				    url: buildBaseUrl() + '/issues/' + issue + '/labels',
+				    type: 'POST',
+				    data: JSON.stringify( [ label ] ),
+				    headers: setAuth(),
+				    success: function(result) {
+			      	console.log('EVENT: Add tag: ' + label + ' from ' + issue);
+				    },
+				    error: function(err) {
+				    	console.log('ERROR: Cannot add tag: ' + label + ' from ' + issue);
+				    	console.log(err);
+				    }
+					}).done(function() {
+			    	equalize(); // Match column heights
+					});
 
-  			});
+		    }
+		  });
+		  $('.select-assignee').change(function (event, ui) {
+		  	var issue = $($(this).parent().parent().parent())[0]['id'].substr(6);
+		  	var newAssignee = this.value;
+
+		  	if (newAssignee == '') {
+		  		newAssignee = null;
+		  		var data = { assignee: newAssignee };
+		  	}
+	    	$.ajax({
+			    url: buildBaseUrl() + '/issues/' + issue,
+			    type: 'PATCH',
+			    data: JSON.stringify( { assignee: newAssignee } ),
+			    headers: setAuth(),
+			    success: function(result) {
+		      	console.log('EVENT: Assign task ' + issue + ' to ' + newAssignee);
+			    },
+			    error: function(err) {
+			    	console.log('ERROR: Cannot assign task ' + issue + ' to ' + newAssignee);
+			    	console.log(err);
+			    }
+				});
+		  });
+	  }
+	  $('a.add-new-task').on('click', function() {
+	  	$('#new-task-board').val($(this).attr('milestone'));
+	  	$('#create-task-title').html('Create new task on ' + $(this).attr('board'));
+			$('#create-task').foundation('reveal','open');
+			$('#create-task-form').on('submit', function(event) {
+				event.preventDefault();
+			  var form = {};
+				$.each($(this).serializeArray(), function (i, field) {
+		    	form[field.name] = field.value || "";
+				});
+				if ( ! form.title ) {
+					alert('You must include a title');
+				} else {
+					form.labels = [ 'scrum-state-story' ];
+					$('#create-task').foundation('reveal','close');
+		    	$.ajax({
+				    url: buildBaseUrl() + '/issues',
+				    type: 'POST',
+				    data: JSON.stringify( form ),
+				    headers: setAuth(),
+				    success: function(result) {
+				    	console.log(result);
+			      	console.log('EVENT: Created new task.');
+			      	// Create the task in the column.
+			      	new SingleTaskView([ result ], 'scrum-state-story');
+			      	equalize(); // Match column heights
+				    },
+				    error: function(err) {
+				    	console.log('ERROR: Cannot create new task');
+				    	console.log(err);
+				    }
+					});
+				}
 			});
-
-		  // $('.add-new-task').on('click', function(event) {
-		  // 	event.preventDefault();
-		  // 	alert('add new task');
-		  // });
-
-		  // Make the columns match in heights
-		  $('.scrum-column').matchHeight();
-
-		  // Initialize the tabs
-		  $( "#tabs" ).tabs();
 		});
-	} // End loadApp();
 
-	function unloadApp() {
-		try {
-			$( '#tabs' ).tabs( 'destroy' );
-		} catch(err) {
-    	// Nothing here. I just leave this in for now because I want to try to
-    	// not destroy the tabs beore they are ever created. Hence, we just
-    	// ignore the error.
-		}
-		$('#boards').html('');
-		$('#ul-tabs').html('');
+	  updateTabs();
+	  updateMenu();
+	  equalize();
+
+	  $( '#ul-tabs li:first-child' ).addClass( 'active' );
+	  $( '#boards div.content:first-child' ).addClass( 'active' );
+	});
+} // End loadApp();
+
+function unloadApp() {
+	$('#boards').html($('#about-content').html());
+	$('#ul-tabs').html('');
+	updateTabs();
+	updateMenu();
+}
+
+
+// Apply foundation to make everything work better, please.
+$(document).foundation();
+
+// Load up the login information and the app
+$(document).ready(function() {
+	var repoOwner = getRepoOwner();
+	var repo = getRepo();
+	if ( repoOwner && repo ) {
+  	$('input#repoOwner').val(repoOwner);
+		$('input#repo').val(repo);
+	}
+	loadRepo();
+
+	var login = getLogin();
+	var password = getPassword();
+	if ( login && password ) {
+		buildLogoutLink({login: login});
+		loadApp(repo, repoOwner);
+	} else {
+		buildLoginForm();
 	}
 
-
-	// Apply foundation to make everything work better, please.
-  $(document).foundation();
-
-  // Load up the login information and the app
-  $(document).ready(function() {
-  	var repoOwner = sessionStorage.getItem('repoOwner');
-  	var repo = sessionStorage.getItem('repo');
-  	if ( repoOwner && repo ) {
-	  	$('input#repoOwner').val(repoOwner);
-			$('input#repo').val(repo);
-  	}
-		loadRepo();
-
-  	var login = sessionStorage.getItem('login');
-  	var password = sessionStorage.getItem('password');
-  	if ( login && password ) {
-			buildLogoutLink({login: login});
-			loadApp(repo, repoOwner);
-  	} else {
-  		buildLoginForm();
-  	}
-
-  });
+});
 
 
 </script>
