@@ -287,6 +287,9 @@ function loadApp(repo, repoOwner) {
 				number: board.number,
 			});
 		  columns.render();
+
+		  var newWidth = Math.round($('.scrum-column:first').offsetParent().width()*(($('.scrum-column:first').outerWidth()/100)*0.95 ) );
+		  $('body').append('<style>.task { width: ' + newWidth + '; max-width: ' + newWidth + '; }</style>')
 		});
 
 	  // This will render the tasks in the columns
@@ -461,6 +464,7 @@ $(document).ready(function() {
 	}
 	updateTabs();
 	updateMenu();
+
 });
 
 
