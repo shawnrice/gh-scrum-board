@@ -86,13 +86,16 @@ nav li.name > a {
 	border: 1px solid gray;
 	display: none;
 }
+.scrum-column > ul {
+	margin: 0;
+}
 
 .task {
 	background-color: white;
 	min-height: 200px;
-	width: 200px !important;
+	width: 200px;
 	padding: 0.25rem;
-	margin: 0.5rem !important;
+	margin: 2rem auto !important;
 	border: 1px solid gray;
 	list-style-type: none;
 }
